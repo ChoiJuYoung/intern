@@ -4,6 +4,14 @@
 lst = [1, 2, 3, 4, 5]
 
 x = abs(-1) # return 1
+class test():
+    def __abs__(self):
+        print("hello")
+
+te = test()
+print(abs(te))
+
+
 x = all(lst) # return True if all elements of iterable is True
 '''
 def all(iterable):
