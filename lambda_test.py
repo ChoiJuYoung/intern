@@ -40,3 +40,12 @@ for _ in range(100000):
 end = datetime.now()
 print(str(end - start))
 print(lst2)
+
+start = datetime.now()
+for _ in range(100000):
+    lst3 = []
+    for lbl in lst:
+        lst3.append(lbl.decode('utf-8'))
+end = datetime.now()
+print(str(end - start))
+print(lst3)
