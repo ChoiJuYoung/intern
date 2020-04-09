@@ -20,5 +20,5 @@ def any(iterable):
             return True
     return False
 '''
-x = ascii(87)
+x = ascii("안녕하세요")
 print(x)
