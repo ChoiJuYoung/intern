@@ -49,3 +49,12 @@ for _ in range(100000):
 end = datetime.now()
 print(str(end - start))
 print(lst3)
+
+
+
+
+
+
+
+
+
