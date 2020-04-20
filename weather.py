@@ -81,6 +81,14 @@ def getWeather2(bsObject, where):
     
     return [text1, text2]
 
+def getWeather_bs(where):
+    url = "https://search.naver.com/search.naver?query=" + parse.quote(where + "+날씨")
+    html = urlopen(url)
+    bs = BeautifulSoup(html, "html.parser")
+    loc = bs.find('span', attrs={'class': 'btn_select'}).text
+    weather = bs.find('p', attrs={'class': 'cast_txt'}).text
+    
+
 def getQuasa():
     url = "https://quasarzone.co.kr/bbs/board.php?bo_table=qb_saleinfo"
     html = urlopen(url)

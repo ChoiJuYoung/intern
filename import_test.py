@@ -10,6 +10,7 @@ def chk_time(func):
     return _chk_time()
 
 bsObject = w.init("회기동")
+print(bsObject)
 
 
 @chk_time
