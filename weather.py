@@ -2,11 +2,15 @@ from urllib.request import urlopen
 from urllib import parse
 from bs4 import BeautifulSoup
 
-def getWeather(where):
+def init(where):
     url = "https://search.naver.com/search.naver?query=" + parse.quote(where + "+날씨")
     html = urlopen(url)
     bsObject = BeautifulSoup(html, "html.parser")
     bsObject = str(bsObject)
+
+    return bsObject
+
+def getWeather(bsObject, where):
     
     loc = bsObject.split("<em>")[7].split("<")[0]
     weather = bsObject.split("<p class=\"cast_txt\">")[1].split("아")[0]
@@ -41,11 +45,7 @@ def getWeather(where):
     
     return [text1, text2]
 
-def getWeather2(where):
-    url = "https://search.naver.com/search.naver?query=" + parse.quote(where + "+날씨")
-    html = urlopen(url)
-    bsObject = BeautifulSoup(html, "html.parser")
-    bsObject = str(bsObject)
+def getWeather2(bsObject, where):
 
     res = {}
     
