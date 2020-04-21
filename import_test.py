@@ -13,25 +13,12 @@ def chk_time(func):
 bsObject = w.init("회기동")
 #print(bsObject)
 
-html = '<td id="td1" class="title">' \
-       '  <div class="tit3">' \
-       '    <a href="/movie/bi/mi/basic.nhn?code=161242" title="범죄도시">범죄도시</a>' \
-       '  </div>' \
-       '  <div class="tit4">' \
-       '    hi' \
-       '  </div>' \
-       '</td>'
-
 @chk_time
 def normal():
     for _ in range(100000):
-        html.split("<td id=\"td1\" class=\"title\">")
-        html.split("<td id=\"td1\" class=\"title\">")
-        html.split("<td id=\"td1\" class=\"title\">")
+        print()
         
 @chk_time
 def bs():
     for _ in range(100000):
-        html.find('td')
-        html.find('td')
-        html.find('td')
+        print()
