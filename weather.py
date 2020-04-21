@@ -6,12 +6,10 @@ def init(where):
     url = "https://search.naver.com/search.naver?query=" + parse.quote(where + "+날씨")
     html = urlopen(url)
     bsObject = BeautifulSoup(html, "html.parser")
-    bsObject = str(bsObject)
 
     return bsObject
 
 def getWeather(bsObject, where):
-    
     loc = bsObject.split("<em>")[7].split("<")[0]
     weather = bsObject.split("<p class=\"cast_txt\">")[1].split("아")[0]
     temp = bsObject.split("<span class=\"todaytemp\">")[1].split("<")[0]
@@ -45,48 +43,23 @@ def getWeather(bsObject, where):
     
     return [text1, text2]
 
-def getWeather2(bsObject, where):
-
-    res = {}
-    
-    res["loc"] = bsObject.split("<em>")[7].split("<")[0].strip()
-    res["weather"] = bsObject.split("<p class=\"cast_txt\">")[1].split("아")[0]
-    res["temp"] = bsObject.split("<span class=\"todaytemp\">")[1].split("<")[0]
-    res["ltemp"] = bsObject.split("<span class=\"num\">")[1].split("<")[0]
-    res["htemp"] = bsObject.split("<span class=\"num\">")[2].split("<")[0]
-    res["ftemp"] = bsObject.split("<span class=\"num\">")[3].split("<")[0]
-    res["mrain"] = bsObject.split("<span class=\"num\">")[8].split("<")[0]
-    res["arain"] = bsObject.split("<span class=\"num\">")[9].split("<")[0]
-    res["dust"] = bsObject.split("<span class=\"num\">")[5].split("<")[0]
-    res["fdust"] = bsObject.split("<span class=\"num\">")[6].split("<")[0]
-    res["ozone"] = bsObject.split("<span class=\"num\">")[7].split("<")[0]
-    res["wind"] = bsObject.split("<span>")[47].split("<")[0]
-    res["humid"] = bsObject.split("<span>")[63].split("<")[0]
-    res["tmt"] = bsObject.split("<span class=\"todaytemp\">")[2].split("<")[0]
-    res["tat"] = bsObject.split("<span class=\"todaytemp\">")[3].split("<")[0]
-    res["tmw"] = bsObject.split("<p class=\"cast_txt\">")[2].split("<")[0]
-    res["taw"] = bsObject.split("<p class=\"cast_txt\">")[3].split("<")[0]
-    res["tmr"] = bsObject.split("<span class=\"num\">")[10].split("<")[0]
-    res["tar"] = bsObject.split("<span class=\"num\">")[11].split("<")[0]
-    res["datmt"] = bsObject.split("<span class=\"todaytemp\">")[4].split("<")[0]
-    res["datat"] = bsObject.split("<span class=\"todaytemp\">")[5].split("<")[0]
-    res["datmw"] = bsObject.split("<p class=\"cast_txt\">")[4].split("<")[0]
-    res["dataw"] = bsObject.split("<p class=\"cast_txt\">")[5].split("<")[0]
-    res["datmr"] = bsObject.split("<span class=\"num\">")[12].split("<")[0]
-    res["datar"] = bsObject.split("<span class=\"num\">")[13].split("<")[0]
-    res["t"] = bsObject.split("<span class=\"day_info\">")[2].split(" ")[0]
-    res["dt"] = bsObject.split("<span class=\"day_info\">")[3].split(" ")[0]
-    text1 = (where + "의 기상 정보\n" + "(" + "위치: " + res["loc"] + ")" + "\n\n날씨: " + res["weather"]  + "음\n" + "최저/최고 기온: " + res["ltemp"] + "º / " + res["htemp"] + "º\n" + "현재 기온: " + res["temp"] + "º\n" + "체감온도: " + res["ftemp"] + "º\n" + "습도: " + res["humid"] + "%\n" + "풍속: " + res["wind"] + "m/s" + "\n오전 강수확률: " + res["mrain"] + "%" + "\n오후 강수확률: " + res["arain"] + "%" + "\n미세먼지: " + res["dust"] + "\n초미세먼지: " + res["fdust"] + "\n오존: " + res["ozone"])
-    text2 = ("내일(" + res["t"] + ") 날씨\n\n" + "오전: " + res["tmw"] + ", " + res["tmt"] + "º\n" + "강수확률: " + res["tmr"] + "%\n" + "오후: " + res["taw"] + ", " + res["tat"] + "º\n" + "강수확률: " + res["tar"] + "%\n\n\n" + "모레(" + res["dt"] + ") 날씨\n\n" + "오전: " + res["datmw"] + ", " + res["datmt"] + "º\n" + "강수확률: " + res["datmr"] + "%\n" + "오후: " + res["dataw"] + ", " + res["datat"] + "º\n" + "강수확률: " + res["datar"] + "%")
-    
-    return [text1, text2]
-
-def getWeather_bs(where):
-    url = "https://search.naver.com/search.naver?query=" + parse.quote(where + "+날씨")
-    html = urlopen(url)
-    bs = BeautifulSoup(html, "html.parser")
+def getWeather_bs(bs, where):
     loc = bs.find('span', attrs={'class': 'btn_select'}).text
     weather = bs.find('p', attrs={'class': 'cast_txt'}).text
+    temp = bs.find('span', attrs={'class': 'todaytemp'}).text
+    #lhtemp = [[t.text for t in b.find('dl').find_all('span')] for b in bs.find_all('li', attrs={'class': 'date_info today'})]
+    ltemp = bs.find('span', attrs={'class': 'min'}).text
+    htemp = bs.find('span', attrs={'class': 'max'}).text
+    ftemp = bs.find('span', attrs={'class': 'sensible'}).find('em').text
+    rain = [li.find('span', attrs={'class': 'num'}).text for li in bs.find_all('li', attrs={'class': 'date_info today'})]
+    mrain = rain[0]
+    arain = rain[1]
+    d = [d.text for d in bs.find('dl', attrs={'class': 'indicator'}).find_all('span', attrs={'class': 'num'})]
+    dust = d[0]
+    fdust = d[1]
+    ozone = d[2]
+    wind = bs.find('div', attrs={'class': 'info_list wind _tabContent'}).find('span').text
+    humid = bs.find('div', attrs={'class': 'info_list humidity _tabContent'}).find('span').text
     
 
 def getQuasa():

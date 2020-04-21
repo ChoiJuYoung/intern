@@ -1,5 +1,6 @@
 import weather as w
 from datetime import datetime
+from bs4 import BeautifulSoup
 
 def chk_time(func):
     def _chk_time():
@@ -10,15 +11,27 @@ def chk_time(func):
     return _chk_time()
 
 bsObject = w.init("회기동")
-print(bsObject)
+#print(bsObject)
 
+html = '<td id="td1" class="title">' \
+       '  <div class="tit3">' \
+       '    <a href="/movie/bi/mi/basic.nhn?code=161242" title="범죄도시">범죄도시</a>' \
+       '  </div>' \
+       '  <div class="tit4">' \
+       '    hi' \
+       '  </div>' \
+       '</td>'
 
 @chk_time
 def normal():
-    for _ in range(1000):
-        w.getWeather(bsObject, "회기동")
-
+    for _ in range(100000):
+        html.split("<td id=\"td1\" class=\"title\">")
+        html.split("<td id=\"td1\" class=\"title\">")
+        html.split("<td id=\"td1\" class=\"title\">")
+        
 @chk_time
-def normal2():
-    for _ in range(1000):
-        w.getWeather2(bsObject, "회기동")
+def bs():
+    for _ in range(100000):
+        html.find('td')
+        html.find('td')
+        html.find('td')
