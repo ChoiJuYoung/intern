@@ -25,13 +25,13 @@ def implement():
         if li in entire_list.keys():
             if ti == entire_list[li]:
                 continue
+            print(li + "\n제목 수정: " + entire_list[li] + " => " + ti)
             entire_list[li] = ti
             save()
             continue
         entire_list[li] = ti
         save()
-        print(li)
-        print(ti)
+        print(li + "\n신규 정보: " + ti)
 
 
 def save():
