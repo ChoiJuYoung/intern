@@ -46,7 +46,8 @@ def getWeather(bsObject, where):
 def getWeather_bs(bs, where):
     loc = bs.find('span', attrs={'class': 'btn_select'}).text
     weather = bs.find('p', attrs={'class': 'cast_txt'}).text
-    temp = bs.find('span', attrs={'class': 'todaytemp'}).text
+    temp_all = [li.text for li in bs.find_all('span', attrs={'class': 'todaytemp'})]
+    temp = temp_all[0]
     #lhtemp = [[t.text for t in b.find('dl').find_all('span')] for b in bs.find_all('li', attrs={'class': 'date_info today'})]
     ltemp = bs.find('span', attrs={'class': 'min'}).text
     htemp = bs.find('span', attrs={'class': 'max'}).text
@@ -60,6 +61,9 @@ def getWeather_bs(bs, where):
     ozone = d[2]
     wind = bs.find('div', attrs={'class': 'info_list wind _tabContent'}).find('span').text
     humid = bs.find('div', attrs={'class': 'info_list humidity _tabContent'}).find('span').text
+    tmt = temp_all[1]
+    tat = temp_all[2]
+    
     
 
 def getQuasa():
