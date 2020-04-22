@@ -73,3 +73,5 @@ def getQuasa():
     bsObject = str(bsObject)
 
     return bsObject
+
+    
