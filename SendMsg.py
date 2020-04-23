@@ -17,14 +17,3 @@ for ut in ut_list:
     time.sleep(4)
     
 
-
-# IN MFC
-# LRESULT SendMessage(HWND hWnd, UINT message, WPARAM wparam = 0, LPARAM lParam = 0)
-# LRESULT PostMessage(HWND hWnd, UINT message, WPARAM wparam = 0, LPARAM lParam = 0)
-
-    # message
-        # 발생시키고자 하는 메세지를 unsigned int 타입으로 명시
-    # wParam (WORD PARAMETER) - 주로 핸들 또는 정수를 전달
-        # 메세지에 대한 부가적인 정보를 WPARAM 타입으로 명시.
-    # lParam (LONG PARAMETER) - 주로 포인터 값 전달
-        # 메세지에 대한 부가적인 정보를 LPARAM 타입으로 명시.
