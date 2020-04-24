@@ -15,5 +15,3 @@ hwnd2 = win32gui.FindWindowEx(hwnd1, 0, "RichEdit20W", "")
 for ut in ut_list:
     sendMsg(hwnd2, ut)
     time.sleep(4)
-    
-
