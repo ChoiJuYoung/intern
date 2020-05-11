@@ -16,12 +16,6 @@ def implement():
     html = urlopen(url)
     bs = BeautifulSoup(html, "html.parser")
 
-    '''
-    span_items = bs.find_all('span')
-    for span in span_items:
-        span.extract()
-    '''
-
     item = bs.find_all('a', attrs={'class': 'subject-link'})
     link = ["https://quasarznoe.co.kr" + it.attrs['href'] for it in item]
     title = [it.text.strip() for it in item]
