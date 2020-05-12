@@ -39,7 +39,6 @@ def implement():
         pass
 
 def save():
-    print(entire_list)
     f = open('C:\\quasar.txt', 'w')
     f.write(str(entire_list).replace("\'", "\""))
 
