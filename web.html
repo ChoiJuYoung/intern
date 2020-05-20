@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WEB 공부한 것들</title>
+        <link href="style.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="index">
+            <a href="#howto">1. how to use css</a><br>
+            <a href="#frame">2. 어떤 형식으로 쓰나요?</a><br>
+            <a href="#font">3. Font에 관하여</a>
+        </div>
+        <div id="body">
+            <div id="howto" class="main">
+                <p class="category">1. how to use css</p>
+                <p class="content">
+                    우선은 HTML에서 어떻게 css를 사용하느냐를 먼저 보겠습니다.
+                    <p class="source">
+                        INLINE STYLE SHEET: <code>&lt;p style="color: blue"&gt;Like this&lt;/p&gt;</code>처럼 태그에 삽입
+                    </p><br>
+                    <p class="source">
+                        LINKING STYLE SHEET: <code>&lt;head&gt;에 &lt;link href="style.css" type="text/css" rel="stylesheet"&gt;</code>로 CSS파일 연결
+                    </p><br>                    
+                    <p class="source">
+                        INTERNAL STYLE SHEET: <code>&lt;head&gt;에 &lt;style&gt;과 &lt;/style&gt;</code>사이에 넣기
+                    </p>
+                    <br>
+                    식으로 사용이 가능합니다.
+                </pre>
+            </div>
+
+            <div id="frame" class="main">
+                <p class="category">2. 어떤 형식으로 쓰나요?</p>
+                <p class="content">
+                    기본적인 구조는 다음과 같습니다.<br>
+                    <p class="source">
+                        <code>
+                                &nbsp;p {<br>
+                                    &nbsp;&nbsp;&nbsp;font-family: serif; <br>
+                                &nbsp;}
+                        </code>
+                    </p><br>
+                    즉, 어떤 것에 적용될 지를 미리 적어둔 뒤, 어떤 내용을 적용할 지 적어주게 됩니다.<br>
+                    ID는 #, class는 .과 함께 사용합니다.<br>
+                    가령, id가 test라면,<br>
+                    <p class="source">
+                        <code>
+                            &nbsp;#test { font-family: serif; }
+                        </code>
+                    </p><br>
+                    식으로 적어주며, class가 container라면,<br>
+                    <p class="source">
+                        <code>
+                            &nbsp;.container { font-family: serif; }
+                        </code>
+                    </p><br>
+                    와 같이 사용해주게 됩니다. 태그는 단독으로 적어주면 됩니다.<br>
+                    다만, 여러가지가 중첩돼서 들어가는 경우에는 문제가 생길 수 있습니다.<br>
+                    이에 대해서는, <code>&lt;p id="test" class="hello"&gt;</code>라는 친구가 있다면<br>
+                    가장 우선해서 적용되는 것이 태그인지 id인지 class인지는 정해져 있습니다.<br>
+                    이 때의 specificity는 ID > class > tag순입니다.<br>
+                    또한, nested된 태그는 non-nested보다 우선됩니다.<br>
+                    nested란, 다음의 코드를 통해 볼 수 있습니다.<br>
+                    <p class="source">
+                        <code>
+                            &nbsp;&lt;div id="test"&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;p class="container"&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CONTENT<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;<br>
+                            &nbsp;&lt;/div&gt;
+                        </code>
+                    </p><br>
+                    위의 코드에서, CONTENT는 div태그 속의 p태그에 있습니다.<br>
+                    이 때, p태그를 nested되었다 라고 합니다.<br>
+                    전체 p가 아닌 위와 같은 경우만을 특별하게 취급해주기 위해서는<br>
+                    <p class="source">
+                        <code>
+                            &nbsp;div p.container {<br>
+                                &nbsp;&nbsp;&nbsp;font-family: serif;<br>
+                            &nbsp;}
+                        </code>
+                    </p><br>
+                    과 같이 기재해주면 됩니다.<br>
+                    여기서 주의할 점은, p와 .container가 떨어져 있는 것이 아니라, p.container로 붙어있다는 점입니다.<br>
+                    만약, p와 .container가 떨어져 있다면, 위의 코드는<br>
+                    우리가 의도했던 <empha>div태그 속의 container클래스인 p태그</empha><br>
+                    가 아닌, <empha>div태그 속의 p태그 속의 container클래스</empha><br>
+                    라는 의미가 되어버립니다.<br>
+                </p>
+            </div>
+            <div id="font" class="main">
+                <p class="category">3. Font에 관하여</p>
+                <p class="content">
+                    다음으로는 폰트에 관하여 보도록 하겠습니다.<br>
+                    가장 먼저 볼 수 있는 친구는 font-family입니다.<br>
+                    이 친구는, 폰트를 설정합니다.<br>
+                    <p class="source">
+                        <code>
+                            font-family: serif;
+                        </code>
+                    </p><br>
+                    와 같이 입력 시, serif 폰트 중 임의의 폰트가 설정되게 됩니다.
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
