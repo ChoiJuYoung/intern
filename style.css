@@ -2,6 +2,7 @@ body {
     font-family: sans-serif;
     font-size: 15px;
     max-width: 1000px;
+    min-width: 400px;
     background-color: black;
     color: white;
     background-image: url(img/profile.png);
@@ -16,10 +17,12 @@ body {
 
 #index {
     text-align: center;
-    height:100px;
-    background-color: rgba(255, 255, 255, 0.85);
-    color:black;
+    background-color: rgba(220, 255, 246, 0.85);
     margin-top: 50px;
+}
+
+a {
+    color: #ffb5ff;
 }
 
 p.category {
@@ -29,7 +32,7 @@ p.category {
 }
 
 p.source {
-    border: 2px dotted yellow;;
+    border: 2px dotted yellow;
     box-sizing: content-box;
     display: inline-block;
     padding: 5px;
@@ -40,7 +43,18 @@ code {
     color: #ff69ff;
 }
 
+code:hover {
+    color: #ffb5ff;
+}
+
 empha {
     font-weight: bold;
     color: #a8deff;
+}
+
+img {
+    width: 75%;
+    height: 75%;
+    margin: 0 auto;
+    display:block;
 }
