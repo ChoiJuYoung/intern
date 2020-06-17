@@ -2,20 +2,26 @@
 import win32gui
 import time
 
-def sendMsg(hwnd2, msg): # hwnd2에 메시지 보내는 메서드
+def sendMsg(hwnd2, msg): # hwnd2에 메시지 보내는 메서드\
+    win32gui.PostMessage(hwnd2, 0x0100, 0x20, 0x1C001) # SEND SPACEBAR
+    time.sleep(1) # WAIT FOR SPACE 요건 지우면 안됨! 시간 텀 조정을 원할 시 맨 밑 반복문에서 조정해줄 것.
     win32gui.SendMessage(hwnd2, 0x000c, 0, msg) # SET TEXT TO MESSAGE BOX
-    win32gui.PostMessage(hwnd2, 0x0100, 0xD, 0) # SEND CR(CARRIAGE RETURN = ENTER)
+    win32gui.PostMessage(hwnd2, 0x0100, 0xD, 0x1C001) # SEND CR(CARRIAGE RETURN = ENTER)
 
-f = open('utterance.txt', 'r') # READ FILE
-room = f.readline().strip() # GET KAKAOTALK ROOM'S NAME FROM FILE
+try:
+    f = open('utterance.txt', 'r') # READ FILE
+    room = f.readline().strip() # GET KAKAOTALK ROOM'S NAME FROM FILE
+except:
+    f = open('utterance.txt', 'r', encoding='utf-8')
+    room = f.readline().strip()
 ut_list = [ut.strip() for ut in f.readlines() if ut is not "\n"] # READ ALL UTTERANCE
 
 hwnd1 = win32gui.FindWindow(None, room) # GET THE ROOM'S HANDLE
-hwnd2 = win32gui.FindWindowEx(hwnd1, 0, "RichEdit20W", "") # GET MESSAGEBOX'S HANDLE
+hwnd2 = win32gui.FindWindowEx(hwnd1, 0, "RICHEDIT50W", "") # GET MESSAGEBOX'S HANDLE
 
 for ut in ut_list: # FOR ALL UTTERANCE
     sendMsg(hwnd2, ut) # SEND MSG TO KAKAOTALK
-    time.sleep(5) # WAIT 5 SECONDS
+    time.sleep(4) # WAIT 5 SECONDS
 
 # 시간텀을 변경하고 싶다면 time.sleep()부분 초 변경. parameter로는 초(밀리초 아님!)가 주어짐.
 
@@ -23,10 +29,12 @@ for ut in ut_list: # FOR ALL UTTERANCE
 """
 # utterance.txt 파일 구성
 
-# 방 이름 (갠톡일 경우 챗봇 이름)
+# 방 이름 (갠톡일 경우 이름)
 # 이후 보낼 메시지 쭉 열거
-# 저장 시 다른이름으로 저장을 사용해 인코딩을 ANSI로 해주기 (기본적으로 UTF-8)
-# cp949 decode error가 나온다면, 인코딩이 ANSI가 아닌 것.
+
+# 아래의 문제는 ERR 처리 해놓았음.
+        # 저장 시 다른이름으로 저장을 사용해 인코딩을 ANSI로 해주기 (기본적으로 UTF-8)
+        # cp949 decode error가 나온다면, 인코딩이 ANSI가 아닌 것.
 """
 
 
